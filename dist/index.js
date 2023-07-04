@@ -2860,13 +2860,16 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(186)
 const wait = __nccwpck_require__(312)
 const execSync = (__nccwpck_require__(81).execSync)
+const existSync = (__nccwpck_require__(147).existsSync)
 
 // most @actions toolkit packages have async methods
 async function run () {
   try {
+    existSync('./package.json') || core.setFailed('package.json not found')
+
     const failOn = core.getInput('failOn')
     if (!failOn) {
-      throw new Error('failOn is required')
+      core.setFailed('failOn is required')
     }
 
     core.info(`Checking if any of these licenses are found: ${failOn} ...`)
