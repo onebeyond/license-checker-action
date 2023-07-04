@@ -7,13 +7,12 @@ const existSync = require('fs').existsSync
 async function run () {
   try {
     if (!existSync('./package.json')) {
-      core.setFailed('package.json not found');
-      return
+      core.setFailed(new Error('package.json not found'));
     }
 
     const failOn = core.getInput('failOn')
     if (!failOn) {
-      core.setFailed('failOn is required')
+      core.setFailed(new Error('failOn is required'))
       return
     }
 
