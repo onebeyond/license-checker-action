@@ -1,0 +1,9 @@
+name: 'license-checker'
+description: 'license-checker action'
+inputs:
+  failOn:
+    description: 'Fail if any package license does not satisfies any license in the provided list'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
