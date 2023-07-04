@@ -2875,7 +2875,7 @@ async function run () {
     }
 
     core.info(`Checking if any of these licenses are found: ${failOn} ...`)
-    execSync(`npx @onebeyond/license-checker --failOn ${failOn}`)
+    execSync(`npx @onebeyond/license-checker --failOn ${failOn} -y`)
   } catch (error) {
     core.setFailed(error.message)
   }
