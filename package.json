@@ -13,7 +13,8 @@
         "lint": "standard",
         "lint:fix": "standard --fix",
         "format:fix": "prettier-standard --format",
-        "format": "prettier-standard --check"
+        "format": "prettier-standard --check",
+        "try": "npx @onebeyond/license-checker --failOn MIT"
     },
     "standard": {
         "env": [
