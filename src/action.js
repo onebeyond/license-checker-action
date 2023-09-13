@@ -1,6 +1,6 @@
 const core = require('@actions/core')
-const wait = require('./wait')
-const execSync = require('child_process').execSync
+// const wait = require('./wait')
+// const execSync = require('child_process').execSync
 const existSync = require('fs').existsSync
 const { scan } = require('@onebeyond/license-checker/src/runner')
 
@@ -16,7 +16,7 @@ async function run () {
       throw new Error('failOn is required')
     }
 
-    core.info(`Checking if any of these licenses are found: ${failOn} ...`)
+    core.info(`Checking if any of these licenses are found using the @onebeyond/license-checker package: ${failOn} ...`)
     // execSync(`npx @onebeyond/license-checker --failOn ${failOn} -y`)
     await scan({ failOn });
   } catch (error) {
