@@ -2,6 +2,7 @@ const core = require('@actions/core')
 const wait = require('./wait')
 const execSync = require('child_process').execSync
 const existSync = require('fs').existsSync
+const { scan } = require('@onebeyond/license-checker/src/runner')
 
 // most @actions toolkit packages have async methods
 async function run () {
@@ -16,7 +17,8 @@ async function run () {
     }
 
     core.info(`Checking if any of these licenses are found: ${failOn} ...`)
-    execSync(`npx @onebeyond/license-checker --failOn ${failOn} -y`)
+    // execSync(`npx @onebeyond/license-checker --failOn ${failOn} -y`)
+    await scan({ failOn });
   } catch (error) {
     core.setFailed(error.message)
   }
