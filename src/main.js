@@ -8,7 +8,7 @@ async function run() {
     // TODO: Input validation
     const options = {
       // `failOn` input: fail (exit with code 1) if any package license does not satisfies any license in the provided list
-      failOn: core.getInput("failOn", { required: true }),
+      failOn: core.getInput("failOn", { required: true }).split(","),
       // `start` input: path of the initial json to look for
       start: core.getInput("start") || process.cwd(),
       // `outputFileName` input: name of the output file generated
