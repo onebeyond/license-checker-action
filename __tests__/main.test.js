@@ -30,7 +30,7 @@ describe("action", () => {
     getInputMock.mockImplementation((name) => {
       switch (name) {
         case "failOn":
-          return ["AGPL-3.0"];
+          return "AGPL-3.0";
         default:
           return "";
       }
@@ -54,12 +54,12 @@ describe("action", () => {
     );
   });
 
-  it("sets a failed status", async () => {
+  it("fails due to a wrong type of failOn", async () => {
     // Set the action's inputs as return values from core.getInput()
     getInputMock.mockImplementation((name) => {
       switch (name) {
         case "failOn":
-          return "AGPL-3.0";
+          return 10;
         default:
           return "";
       }
@@ -71,8 +71,29 @@ describe("action", () => {
     // Verify that all of the core library functions were called correctly
     expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      // Error thrown by the library @onebeyond/license-checker when failOn is not a list
-      "licenses.some is not a function"
+      // Error thrown when failOn is not a string
+      "core.getInput(...).split is not a function"
+    );
+  });
+  it("fails due to an invalid license name", async () => {
+    // Set the action's inputs as return values from core.getInput()
+    getInputMock.mockImplementation((name) => {
+      switch (name) {
+        case "failOn":
+          return "hello";
+        default:
+          return "";
+      }
+    });
+
+    await main.run();
+    expect(runMock).toHaveReturned();
+
+    // Verify that all of the core library functions were called correctly
+    expect(setFailedMock).toHaveBeenNthCalledWith(
+      1,
+      // Error thrown when failOn is not a string
+      "The following licenses are not SPDX compliant. Please, use the --checkLicense option to validate your input:\nhello"
     );
   });
 
