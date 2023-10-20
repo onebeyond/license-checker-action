@@ -37,5 +37,5 @@ Name of a text file containing the custom header to add at the start of the gene
 ```yaml
 uses: <marketplace-action-name> # Waiting until publishing
 with:
-  failOn: ["GPLv2", "GPLv3", "AGPL"]
+  failOn: ["GPL-1.0-or-later", "AGPL-3.0"]
 ```
