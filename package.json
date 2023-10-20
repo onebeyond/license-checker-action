@@ -1,0 +1,23 @@
+{
+  "name": "license-checker-github-action",
+  "version": "1.0.0",
+  "description": "License checker github action",
+  "main": "action.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onebeyond/license-checker-github-action.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onebeyond/license-checker-github-action/issues"
+  },
+  "homepage": "https://github.com/onebeyond/license-checker-github-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@onebeyond/license-checker": "^2.0.0"
+  }
+}
