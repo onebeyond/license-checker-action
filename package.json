@@ -1,5 +1,5 @@
 {
-  "name": "license-checker-github-action",
+  "name": "license-checker-action",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",

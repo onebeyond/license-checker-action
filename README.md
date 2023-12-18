@@ -1,6 +1,6 @@
-# npm License Checker javascript action
+# npm license-checker-action javascript action
 
-This action prints check licenses of npm dependencies.
+This action prints check licenses of npm dependencies and makes the workflow to pass/fail depending on the result.
 
 ## Inputs
 
@@ -39,3 +39,10 @@ uses: <marketplace-action-name> # Waiting until publishing
 with:
   failOn: ["GPL-1.0-or-later", "AGPL-3.0"]
 ```
+
+## TODO
+
+- Add husky pre-push hook for building and comiting the /dist folder before pushing
+  - Could it be done in a GA instead?
+- Add a GA for testing, linting and checking format
+-

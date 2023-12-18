@@ -1,4 +1,4 @@
-name: "npm License Checker"
+name: "npm license-checker-action"
 description: "Check licenses of npm dependencies"
 inputs:
   failOn:
