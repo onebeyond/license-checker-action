@@ -18,6 +18,7 @@
     "url": "https://github.com/onebeyond/license-checker-github-action/issues"
   },
   "scripts": {
+    "start": "node src/index.js",
     "build": "ncc build src/index.js -o dist",
     "test": "FORCE_COLOR=3 jest  --verbose",
     "test:update": "FORCE_COLOR=3 jest --verbose --u",

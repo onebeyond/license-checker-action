@@ -60910,9 +60910,15 @@ async function run() {
   try {
     const options = getOptions();
 
-    core.debug(`Starting scan at: ${new Date().toLocaleTimeString("eu")}`);
+    core.debug(
+      `Starting scan at: ${new Date().toLocaleTimeString(
+        "eu"
+      )} for the following licenses: ${options.failOn} from ${options.start}`
+    );
     await scan(options);
     core.debug(`Finished scan at: ${new Date().toLocaleTimeString("eu")}`);
+    var fs = __nccwpck_require__(7147);
+    core.debug(fs.readdirSync("./"));
 
     core.info("License check completed! ✓");
   } catch (error) {
