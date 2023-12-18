@@ -47,6 +47,28 @@ describe("Should fail", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+  it("Checks the licenses and fails", async () => {
+    // Set the action's inputs as return values from core.getInput()
+    getInputMock.mockImplementation((name) => {
+      switch (name) {
+        case "failOn":
+          return "MIT";
+        default:
+          return "";
+      }
+    });
+
+    await main.run();
+    expect(runMock).toHaveReturned();
+
+    // Verify that all of the core library functions were called correctly
+    expect(setFailedMock).toHaveBeenNthCalledWith(
+      1,
+      expect.stringMatching(
+        /Found \d+ packages with licenses defined by the --failOn flag:/
+      )
+    );
+  });
   const typeErrorCollectionConfig = [
     {
       field: "start",

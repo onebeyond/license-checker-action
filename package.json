@@ -1,5 +1,6 @@
 {
   "name": "license-checker-action",
+  "license": "MIT",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
