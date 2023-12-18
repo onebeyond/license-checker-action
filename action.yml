@@ -17,9 +17,5 @@ inputs:
   customHeader:
     description: "Name of a text file containing the custom header to add at the start of the generated report"
 runs:
-  using: "composite"
-  steps:
-    - run: npm ci --ignore-scripts --silent
-      shell: bash
-    - run: npm start
-      shell: bash
+  using: "node16"
+  main: "dist/index.js"

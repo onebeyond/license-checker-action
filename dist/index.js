@@ -60899,15 +60899,51 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 2136:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const existSync = (__nccwpck_require__(7147).existsSync);
+const execSync = (__nccwpck_require__(2081).execSync);
+const core = __nccwpck_require__(2186);
+
+const installPackages = () => {
+  // Install npm packages
+  core.debug("Check if package.json exists...");
+  if (!existSync("./package.json")) {
+    throw new Error("package.json not found");
+  }
+  core.debug("package.json found!");
+
+  core.debug("Check if node_modules exists...");
+  if (!existSync("./node_modules")) {
+    core.debug("node_modules not found, installing packages...");
+    execSync(`npm ci --silent --ignore-scripts`);
+    core.debug("packages installed!");
+  } else {
+    core.debug("node_modules found!");
+  }
+};
+
+module.exports = {
+  installPackages,
+};
+
+
+/***/ }),
+
 /***/ 1713:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const { scan } = __nccwpck_require__(7936);
 const core = __nccwpck_require__(2186);
 const { getOptions } = __nccwpck_require__(5030);
+const { installPackages } = __nccwpck_require__(2136);
 
 async function run() {
   try {
+    // Install npm packages
+    installPackages();
+
     const options = getOptions();
 
     core.debug(
@@ -61037,6 +61073,14 @@ module.exports = require("async_hooks");
 
 "use strict";
 module.exports = require("buffer");
+
+/***/ }),
+
+/***/ 2081:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("child_process");
 
 /***/ }),
 
