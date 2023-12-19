@@ -1,4 +1,5 @@
 const core = require("@actions/core");
+const { normalizeBoolean } = require("@ulisesgascon/normalize-boolean");
 
 const getOptions = () => {
   const timestamp = new Date().toISOString();
@@ -60,13 +61,15 @@ const getOption = ({ option, type, validation, defaultValue }) => {
         `The ${option} option must be a ${type} (received ${typeof value})`
       );
     }
-    if (type === "csv") return value.split(",");
-  } else if (type === "boolean") {
-    if (!["true", "TRUE", "false", "FALSE"].includes(value))
-      throw new Error(
-        `The ${option} option must be a ${type} (received ${typeof value})`
+    if (type === "csv")
+      return (
+        value
+          .split(",")
+          .filter((x) => x !== "")
+          .map((x) => x.trim()) || []
       );
-    return value === "true";
+  } else if (type === "boolean") {
+    return normalizeBoolean(value);
   }
   return value;
 };

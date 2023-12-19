@@ -3581,6 +3581,31 @@ module.exports = {
 
 /***/ }),
 
+/***/ 9214:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+exports.__esModule = true;
+exports.normalizeBoolean = void 0;
+function normalizeBoolean(value) {
+    if (!["boolean", "string", "number"].includes(typeof value)) {
+        return false;
+    }
+    var normalizedValue = !isNaN(parseInt(value)) ? parseInt(value) : value;
+    if (typeof normalizedValue === "string") {
+        return ["true", "on", "yes", "y"].includes(normalizedValue.toLowerCase().trim());
+    }
+    if (typeof normalizedValue === "number") {
+        return normalizedValue === 1;
+    }
+    return Boolean(value);
+}
+exports.normalizeBoolean = normalizeBoolean;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ 2068:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -60973,6 +60998,7 @@ module.exports = {
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(2186);
+const { normalizeBoolean } = __nccwpck_require__(9214);
 
 const getOptions = () => {
   const timestamp = new Date().toISOString();
@@ -61034,13 +61060,15 @@ const getOption = ({ option, type, validation, defaultValue }) => {
         `The ${option} option must be a ${type} (received ${typeof value})`
       );
     }
-    if (type === "csv") return value.split(",");
-  } else if (type === "boolean") {
-    if (!["true", "TRUE", "false", "FALSE"].includes(value))
-      throw new Error(
-        `The ${option} option must be a ${type} (received ${typeof value})`
+    if (type === "csv")
+      return (
+        value
+          .split(",")
+          .filter((x) => x !== "")
+          .map((x) => x.trim()) || []
       );
-    return value === "true";
+  } else if (type === "boolean") {
+    return normalizeBoolean(value);
   }
   return value;
 };
