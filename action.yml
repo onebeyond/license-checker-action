@@ -1,0 +1,21 @@
+name: "npm license-checker-action"
+description: "Check licenses of npm dependencies"
+inputs:
+  failOn:
+    description: "Fail (exit with code 1) if any package license does not satisfies any license in the provided list"
+    required: true
+  start:
+    description: "Path of the initial json to look for"
+  outputFileName:
+    description: "Name of the output file generated"
+  errorReportFileName:
+    description: "Name of the file generated when a license in the failOn option is found"
+  disableErrorReport:
+    description: "Flag to disable the error report file generation"
+  disableReport:
+    description: "Flag to disable the report file generation, whether there is an error or not"
+  customHeader:
+    description: "Name of a text file containing the custom header to add at the start of the generated report"
+runs:
+  using: "node16"
+  main: "dist/index.js"

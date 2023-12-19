@@ -1,0 +1,16 @@
+on: [push]
+
+jobs:
+  license-checker-job:
+    runs-on: ubuntu-latest
+    name: Check npm dependencies licenses
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: License check step
+        uses: ./
+        id: license-checker
+        with:
+          failOn: "GPL-1.0,GPL-2.0"
